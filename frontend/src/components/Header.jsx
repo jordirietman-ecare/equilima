@@ -226,6 +226,7 @@ export default function Header({
         key={tab.id}
         type="button"
         onClick={() => handleTab(tab.id)}
+        aria-current={active ? 'page' : undefined}
         className={`group relative flex items-center rounded-xl transition-all ${
           compact ? 'px-3 py-2' : 'min-w-[122px] px-3.5 py-2'
         } ${
@@ -258,7 +259,7 @@ export default function Header({
           <button
             type="button"
             onClick={() => handleTab('research')}
-            className="flex shrink-0 items-center gap-2.5 rounded-xl px-1 py-1 text-left transition hover:opacity-85 focus:outline-none"
+            className="flex shrink-0 items-center gap-2.5 rounded-xl px-1 py-1 text-left transition hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--eq-accent)]"
             aria-label="Go to Research"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-xl border border-[var(--eq-border)] bg-[var(--eq-card)] shadow-[var(--eq-shadow-card)]">
@@ -272,7 +273,7 @@ export default function Header({
             </span>
           </button>
 
-          <nav className="hidden items-center gap-1 rounded-2xl border border-[var(--eq-border)] bg-[var(--eq-card2)] p-1 md:flex">
+          <nav aria-label="Workspace" className="hidden items-center gap-1 rounded-2xl border border-[var(--eq-border)] bg-[var(--eq-card2)] p-1 lg:flex">
             {TABS.map((tab) => navItem(tab))}
           </nav>
 
@@ -280,6 +281,7 @@ export default function Header({
             <button
               type="button"
               onClick={openSearch}
+            aria-label="Search symbols and actions"
               className="hidden h-9 items-center gap-2 rounded-xl border border-[var(--eq-border)] bg-[var(--eq-card)] px-3 text-[11px] font-medium text-[var(--eq-text2)] shadow-[var(--eq-shadow-card)] transition-all hover:border-[var(--eq-border2)] hover:text-[var(--eq-text)] lg:flex"
               title="Search symbols and actions"
             >
@@ -294,7 +296,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={onOpenLearn}
-                className="hidden h-9 items-center gap-1.5 rounded-xl px-2.5 text-[11.5px] font-medium text-[var(--eq-text3)] transition-colors hover:bg-[var(--eq-card)] hover:text-[var(--eq-text2)] xl:flex"
+                className="hidden h-9 items-center gap-1.5 rounded-xl px-2.5 text-[11.5px] font-medium text-[var(--eq-text3)] transition-colors hover:bg-[var(--eq-card)] hover:text-[var(--eq-text2)] lg:flex"
               >
                 <BookOpen className="h-3.5 w-3.5" strokeWidth={1.8} />
                 Learn
@@ -310,14 +312,14 @@ export default function Header({
                 <button
                   type="button"
                   onClick={onSignIn}
-                  className="hidden h-9 items-center rounded-xl px-2.5 text-xs font-medium text-[var(--eq-text2)] transition-colors hover:bg-[var(--eq-card)] hover:text-[var(--eq-text)] sm:flex"
+                  className="flex h-9 items-center rounded-xl px-2 text-xs font-medium text-[var(--eq-text2)] transition-colors hover:bg-[var(--eq-card)] hover:text-[var(--eq-text)]"
                 >
                   Sign in
                 </button>
                 <button
                   type="button"
                   onClick={onSignUp}
-                  className="flex h-9 items-center rounded-xl bg-[var(--eq-text)] px-3.5 text-xs font-semibold text-[var(--eq-bg)] shadow-sm transition-opacity hover:opacity-85"
+                  className="flex h-9 items-center rounded-xl bg-[var(--eq-text)] px-2.5 sm:px-3.5 text-xs font-semibold text-[var(--eq-bg)] shadow-sm transition-opacity hover:opacity-85"
                 >
                   Sign up
                 </button>
@@ -326,15 +328,22 @@ export default function Header({
           </div>
         </div>
 
-        <nav className="no-scrollbar flex items-center gap-1 overflow-x-auto border-t border-[var(--eq-border)] py-1.5 md:hidden">
+        <nav aria-label="Workspace" className="no-scrollbar flex items-center gap-1 overflow-x-auto border-t border-[var(--eq-border)] py-1.5 lg:hidden">
           {TABS.map((tab) => navItem(tab, true))}
+          {onOpenLearn && (
+            <button type="button" onClick={onOpenLearn} aria-label="Learn" title="Learn"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-[var(--eq-text2)] hover:bg-[var(--eq-card)]">
+              <BookOpen className="h-4 w-4" strokeWidth={1.8} />
+            </button>
+          )}
           <button
             type="button"
             onClick={openSearch}
+            aria-label="Search symbols and actions"
             className="ml-auto flex h-8 shrink-0 items-center gap-1.5 rounded-xl border border-[var(--eq-border)] bg-[var(--eq-card)] px-2.5 text-[11px] font-medium text-[var(--eq-text2)]"
           >
             <Search className="h-3.5 w-3.5" strokeWidth={1.8} />
-            Search
+            <span className="hidden sm:inline">Search</span>
           </button>
         </nav>
       </div>
