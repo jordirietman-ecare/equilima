@@ -779,8 +779,8 @@ export async function fetchMarketOverview() {
   return res.json();
 }
 
-export async function fetchMacroOverview() {
-  const res = await fetch(`${BASE}/macro`, { cache: 'no-store', headers: { ...authHeaders() } });
+export async function fetchMacroOverview({ signal } = {}) {
+  const res = await fetch(`${BASE}/macro`, { cache: 'no-store', signal, headers: { ...authHeaders() } });
   if (!res.ok) throw new Error(await parseApiError(res, 'Failed to fetch macro data'));
   return res.json();
 }

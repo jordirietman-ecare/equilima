@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BarChart3, Loader2 } from 'lucide-react';
 import { fetchWarehouseFinancials, fetchWarehouseFilings } from '../../api';
 import ProChart from './ProChart';
+import DecisionSnapshot from './DecisionSnapshot';
 import {
   Panel, KeyStatsCard, PerformanceCard, RiskCard, ValuationCard, TargetsCard,
   FinancialsCard, FilingsCard, AboutCard, RangeCard,
@@ -176,6 +177,8 @@ export default function ResearchDashboard({ symbol, data, loading = false, inten
           </div>
         </div>
       </div>
+
+      <DecisionSnapshot data={data} />
 
       {/* Pro price chart — always, full width */}
       <Panel title="Price" actions={
